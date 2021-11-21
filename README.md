@@ -1,2 +1,3 @@
 # neovim
-my neovim configuration.
+basically this is my neovim config<br />
+too lazy to create this README for now...
