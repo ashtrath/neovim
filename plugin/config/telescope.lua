@@ -32,12 +32,16 @@ telescope.setup {
          preview_cutoff = 120,
       },
       file_sorter = require("telescope.sorters").get_fuzzy_file,
-      file_ignore_patterns = { "node_modules" },
       generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
       path_display = { "shorten" },
       winblend = 0,
       border = {},
-      borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+      borderchars = {
+        { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+        prompt = { "─", "│", " ", "│", "┌", "┐", "│", "│" },
+        results = { "─", "│", "─", "│", "├", "┤", "┘", "└" },
+        preview = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+      },
       color_devicons = true,
       use_less = true,
       set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
@@ -47,6 +51,26 @@ telescope.setup {
       -- Developer configurations: Not meant for general override
       buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
    },
+   pickers = {
+     grep_string = {
+       file_ignore_patterns = {
+         "%.png",
+         "%.jpg",
+         "%.webp",
+         "node_modules",
+         "dotbot",
+        },
+      },
+      find_files = {
+        file_ignore_patterns = {
+          "%.png",
+          "%.jpg",
+          "%.webp",
+          "node_modules",
+          "dotbot",
+        },
+      },
+    },
    extensions = {
       fzf = {
          fuzzy = true, -- false will only do exact matching

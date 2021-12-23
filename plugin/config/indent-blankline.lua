@@ -5,13 +5,18 @@ require("indent_blankline").setup({
   show_current_context = true,
   show_end_of_line = false,
   disable_with_nolist = true,
-  buftype_exclude = { "terminal" },
   filetype_exclude = {
     "help",
     "git",
     "NvimTree",
     "markdown",
     "snippets",
-    "gitconfig"
+    "gitconfig",
+    "terminal",
+    "lspinfo"
+  },
+  buftype_exclude = {
+    "terminal",
+    "nofile"
   },
 })

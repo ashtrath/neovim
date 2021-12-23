@@ -16,13 +16,11 @@ if !&sidescrolloff
     set sidescrolloff=5   " Show next 5 columns while side-scrolling.
 endif
 
-" Auto insert mode & disable things on terminal 
-augroup neo_terminal
+" Blocks changes if buffer is read only.
+augroup blockreadonly
   autocmd!
-  autocmd TermOpen * startinsert
-  autocmd TermOpen * :set nonumber
-  autocmd TermOpen * :set laststatus=0
-augroup END
+  autocmd BufReadPost * let &l:modifiable = !&readonly
+augroup end
 
 " Disable cursorline in some mode
 augroup no_cursorline
@@ -39,3 +37,10 @@ augroup vimrc-remember-cursor-position
   autocmd!
   autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 augroup END
+
+" Not really a autocmd, but this prevent typo when typing q/wq on command line
+cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
+cnoreabbrev <expr> Q ((getcmdtype() is# ':' && getcmdline() is# 'Q')?('q'):('Q'))
+cnoreabbrev <expr> WQ ((getcmdtype() is# ':' && getcmdline() is# 'WQ')?('wq'):('WQ'))
+cnoreabbrev <expr> Wq ((getcmdtype() is# ':' && getcmdline() is# 'Wq')?('wq'):('Wq'))
+

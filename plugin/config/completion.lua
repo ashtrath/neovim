@@ -18,7 +18,7 @@ local snippet_prev_keys = replace_termcodes('<plug>luasnip-jump-prev', true, tru
 
 cmp.setup {
   completion = {
-    completeopt = 'menu, menuone, noinsert',
+    completeopt = 'menu, menuone, noselect, noinsert',
     keyword_length = 3
   },
   snippet = {
@@ -26,17 +26,20 @@ cmp.setup {
       luasnip.lsp_expand(args.body)
     end,
   },
+
+  documentation = {
+    border = 'solid',
+  },
   
   formatting = {
-    format = function(_, vim_item)
-      vim_item.kind = lspkind.presets.default[vim_item.kind] .. ' ' .. vim_item.kind
-      return vim_item
-    end,
+    format = lspkind.cmp_format({ with_text = false, maxwidth = 50 }),
   },
 
   mapping = {
-    ['<cr>'] = cmp.mapping.confirm(),
-    ['<tab>'] = cmp.mapping(function(fallback)
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.close(),
+    ['<CR>'] = cmp.mapping.confirm { select = true, },
+    ['<Tab>'] = cmp.mapping(function(fallback)
       if pumvisible() == 1 then
         feedkeys(next_item_keys, 'n')
       elseif luasnip.expand_or_jumpable() then
@@ -52,7 +55,7 @@ cmp.setup {
     }),
   },
 
-  ['<s-tab>'] = cmp.mapping(function(fallback)
+  ['<S-Tab>'] = cmp.mapping(function(fallback)
     if pumvisible() == 1 then
       feedkeys(prev_item_keys, 'n')
     elseif luasnip.jumpable(-1) then
@@ -66,10 +69,9 @@ cmp.setup {
   }),
 
   sources = {
-    { name = 'nvim_lsp' },
-    { name = 'buffer' },
-    { name = 'nvim_lua' },
-    { name = 'path' },
+    { name = 'nvim_lsp', priority = 10 },
     { name = 'luasnip' },
+    { name = 'path' },
+    { name = 'buffer', keyword_length = 8 },
   },
 }

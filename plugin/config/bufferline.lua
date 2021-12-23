@@ -15,7 +15,7 @@ bufferline.setup({
     show_tab_indicators = true,
     enforce_regular_tabs = false,
     show_buffer_close_icons = true,
-    separator_style = "bar",
+    separator_style = "thick",
     always_show_bufferline = true,
     diagnostics = "nvim_lsp", -- or "coc" if you're using coc
   },
