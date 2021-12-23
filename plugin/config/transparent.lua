@@ -5,14 +5,10 @@ transparent.setup({
   extra_groups = {
     "StatusLineNC",
     "StatusLine",
-    "NvimTreeStatusLine"
+    "ZenBg",
   },
   exclude = {
-    "BufferLineTabClose",
-    "BufferlineBufferSelected",
-    "BufferLineFill",
-    "BufferLineBackground",
-    "BufferLineSeparator",
-    "BufferLineIndicatorSelected"
+    "BufferLineTabClose", "BufferlineBufferSelected", "BufferLineFill",
+    "BufferLineBackground", "BufferLineSeparator", "BufferLineIndicatorSelected"
   },
 })

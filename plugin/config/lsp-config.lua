@@ -35,33 +35,33 @@ local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
     vim.api.nvim_command [[augroup END]]
   end
 
-  --protocol.SymbolKind = { }
+  -- completion symbol
   protocol.CompletionItemKind = {
-    '', -- Text
-    '', -- Method
-    '', -- Function
-    '', -- Constructor
-    '', -- Field
-    '', -- Variable
-    '', -- Class
-    'ﰮ', -- Interface
-    '', -- Module
-    '', -- Property
-    '', -- Unit
-    '', -- Value
-    '', -- Enum
-    '', -- Keyword
-    '﬌', -- Snippet
-    '', -- Color
-    '', -- File
-    '', -- Reference
-    '', -- Folder
-    '', -- EnumMember
-    '', -- Constant
-    '', -- Struct
-    '', -- Event
-    'ﬦ', -- Operator
-    '', -- TypeParameter
+    "   (Text) ",
+    "   (Method)",
+    "   (Function)",
+    "   (Constructor)",
+    " ﴲ  (Field)",
+    "[] (Variable)",
+    "   (Class)",
+    " ﰮ  (Interface)",
+    "   (Module)",
+    " 襁 (Property)",
+    "   (Unit)",
+    "   (Value)",
+    " 練 (Enum)",
+    "   (Keyword)",
+    "   (Snippet)",
+    "   (Color)",
+    "   (File)",
+    "   (Reference)",
+    "   (Folder)",
+    "   (EnumMember)",
+    " ﲀ  (Constant)",
+    " ﳤ  (Struct)",
+    "   (Event)",
+    "   (Operator)",
+    "   (TypeParameter)"
   }
 end
 
@@ -78,6 +78,13 @@ lspConfig.clangd.setup {
   capabilities = capabilities,
   on_attach = on_attach,
   filetypes = { "c", "cpp", "cc" }
+}
+
+lspConfig.cssls.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  filetypes = { "css", "scss" },
+  cmd = { "vscode-css-language-server", "--stdio" }
 }
 
 lspConfig.vimls.setup {
@@ -153,7 +160,7 @@ lspConfig.diagnosticls.setup {
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     underline = false,
-    virtual_text = false,
-    signs = true
+    virtual_text = true,
+    signs = true,
   }
 )
